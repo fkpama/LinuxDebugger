@@ -19,8 +19,12 @@ pool:
   vmImage: windows-latest
 
 steps:
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'LinuxDebuggerKey'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: '$(VsixProjectPath)'
-    arguments: '-c $(Build.Configuration)'
+    arguments: '-c $(Build.Configuration) /p:AssemblyOriginatorKeyFile=$(LinuxDebuggerKey.secureFilePath)'
