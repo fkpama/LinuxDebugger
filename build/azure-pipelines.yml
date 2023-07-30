@@ -32,4 +32,4 @@ steps:
   inputs:
     command: 'build'
     projects: '$(VsixProjectPath)'
-    arguments: '-c $(Build.Configuration) /p:AssemblyOriginatorKeyFile=$(LinuxDebuggerKey.secureFilePath)'
+    arguments: '-c $(Build.Configuration)'
