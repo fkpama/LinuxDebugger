@@ -20,6 +20,7 @@ pool:
 
 steps:
 - task: DownloadSecureFile@1
+  displayName: Download Key
   inputs:
     secureFile: 'LinuxDebuggerKey'
 - task: CmdLine@2
