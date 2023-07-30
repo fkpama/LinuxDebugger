@@ -22,7 +22,9 @@ steps:
 - task: DownloadSecureFile@1
   inputs:
     secureFile: 'LinuxDebuggerKey'
-
+- task: CmdLine@2
+  inputs:
+    script: 'copy "$(LinuxDebuggerKey.secureFilePath)" "$(Build.SourcesDirectory)\build\key.snk"'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
