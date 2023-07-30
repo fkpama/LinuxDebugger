@@ -26,8 +26,8 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      echo Copying file $(secureFilePath) to $(Build.SourcesDirectory)\build\key.snk
-      copy "$(secureFilePath)" "$(Build.SourcesDirectory)\build\key.snk"
+      echo Copying file "$(Agent.TempDirectory)\LinuxDebuggerKey" to $(Build.SourcesDirectory)\build\key.snk
+      copy "$(Agent.TempDirectory)\LinuxDebuggerKey" "$(Build.SourcesDirectory)\build\key.snk"
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
