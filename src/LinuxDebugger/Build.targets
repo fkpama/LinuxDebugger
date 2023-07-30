@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+		<ItemGroup>
+				<ProjectReference Update="@(ProjectReference)">
+						<IncludeOutputGroupsInVSIX>$(DefaultIncludeOutputGroupsInVSIX)</IncludeOutputGroupsInVSIX>
+						<IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup;</IncludeOutputGroupsInVSIXLocalOnly>
+				</ProjectReference>
+		</ItemGroup>
+
+		<Target Name="_CustomSuppressFromVsix"
+				Condition="'$(VsixManifestFileName)'!=''"
+				BeforeTargets="GetVsixSourceItems">
+				<ItemGroup>
+						<SuppressFromVsix Include="System.Numerics.Vectors.dll;
+															System.Reflection.TypeExtensions.dll" />
+				</ItemGroup>
+
+				<ResolvePackageReferences References="@(ReferenceCopyLocalPaths)"
+																	PackageReferences="@(PackageReference)"
+																	Condition="'$(IncludePackageReferencesInVSIXContainer)'=='true' and '@(PackageReference)'!='' ">
+						<Output TaskParameter="ResolvedReferences" ItemName="_ResolvedPackageReferences" />
+				</ResolvePackageReferences>
+
+				<ItemGroup>
+						<SuppressFromVsix Include="@(_ResolvedPackageReferences->'%(Identity)')"
+															Condition="$([System.String]::Copy('%(Filename)').StartsWith('NuGet'))
+															OR
+															$([System.String]::Copy('%(Filename)').StartsWith('Microsoft.Extensions'))"
+															/>
+				</ItemGroup>
+		</Target>
+</Project>

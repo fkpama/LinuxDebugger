@@ -1,0 +1,21 @@
+trigger:
+- master
+
+appendCommitMessageToRunName: true
+variables:
+  - name: Build.Configuration
+    value: Debug
+    readonly: true
+  
+  - name: VsixProjectPath
+    value: src/LinuxDebugger/LinuxDebugger.csproj
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '$(VsixProjectPath)'
+    arguments: '-c $(Build.Configuration)'

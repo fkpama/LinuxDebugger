@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+		<PropertyGroup>
+				<TargetFramework>net472</TargetFramework>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<Nullable>enable</Nullable>
+				<SignAssembly>true</SignAssembly>
+				<UseProjectSystem>true</UseProjectSystem>
+		</PropertyGroup>
+
+		<ItemGroup>
+				<Content Include="Binaries/plink.exe" TargetPath="bin/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+		</ItemGroup>
+
+		<ItemGroup>
+				<Reference Include="Microsoft.VisualStudio.Linux.ConnectionManager.dll" Private="false">
+						<HintPath>$(DevEnvDir)\CommonExtensions\Microsoft\Linux\Linux\Microsoft.VisualStudio.Linux.ConnectionManager.dll</HintPath>
+				</Reference>
+				<Reference Include="liblinux.dll" Private="false">
+						<HintPath>$(DevEnvDir)\PrivateAssemblies\liblinux.dll</HintPath>
+				</Reference>
+				<Reference Include="Microsoft.VisualStudio.Linux.ConnectionManager.Contracts.dll" Private="false">
+						<HintPath>$(DevEnvDir)\CommonExtensions\Microsoft\Linux\Linux\Microsoft.VisualStudio.Linux.ConnectionManager.Contracts.dll</HintPath>
+				</Reference>
+
+
+				<Reference Include="Microsoft.VisualStudio.Linux.Project.dll" Private="false">
+						<HintPath>$(DevEnvDir)\CommonExtensions\Microsoft\Linux\Linux\Microsoft.VisualStudio.Linux.Project.dll</HintPath>
+				</Reference>
+				<Reference Include="Microsoft.VisualStudio.Linux.Shared.dll" Private="false">
+						<HintPath>$(DevEnvDir)\PrivateAssemblies\Microsoft.VisualStudio.Linux.Shared.dll</HintPath>
+				</Reference>
+
+				<Reference Include="Microsoft.VisualStudio.Terminal.dll" Private="false">
+						<HintPath>$(DevEnvDir)\CommonExtensions\Microsoft\Terminal\Microsoft.VisualStudio.Terminal.dll</HintPath>
+				</Reference>
+
+				<PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.1.*" />
+				<PackageReference Include="Microsoft.ServiceHub.Framework" Version="4.0.*" />
+				<PackageReference Include="Microsoft.VisualStudio.Composition" Version="17.4.*" />
+		</ItemGroup>
+
+		<ItemGroup>
+		  <ProjectReference Include="..\LinuxDebugger.Core\LinuxDebugger.Core.csproj" />
+		</ItemGroup>
+
+		<ItemGroup>
+		  <Compile Update="DialogStrings.Designer.cs">
+		    <DesignTime>True</DesignTime>
+		    <AutoGen>True</AutoGen>
+		    <DependentUpon>DialogStrings.resx</DependentUpon>
+		  </Compile>
+		</ItemGroup>
+
+		<ItemGroup>
+		  <EmbeddedResource Update="DialogStrings.resx">
+		    <Generator>ResXFileCodeGenerator</Generator>
+		    <LastGenOutput>DialogStrings.Designer.cs</LastGenOutput>
+		  </EmbeddedResource>
+		</ItemGroup>
+</Project>

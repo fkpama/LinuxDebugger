@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../build/Key.snk</AssemblyOriginatorKeyFile>
+    <IncludeDebugSymbolsInVSIXContainer>true</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>true</IncludeDebugSymbolsInLocalVSIXDeployment>
+		<IncludeOutputGroupsInVSIX>DebugSymbolsProjectOutputGroup;BuiltProjectOutputGrou;bBuiltProjectOutputGroupDependencies;GetCopyToOutputDirectoryItems;SatelliteDllsProjectOutputGroup</IncludeOutputGroupsInVSIX>
+	</PropertyGroup>
+
+		<PropertyGroup>
+				<DefaultIncludeOutputGroupsInVSIX>
+						BuiltProjectOutputGroup;
+						DebugSymbolsProjectOutputGroup;
+						GetCopyToOutputDirectoryItems;
+						DebugSymbolsProjectOutputGroupDependencies;
+						<!--SatelliteDllsProjectOutputGroup;
+						BuiltProjectOutputGroupDependencies;
+						SatelliteDllsProjectOutputGroupDependencies-->
+				</DefaultIncludeOutputGroupsInVSIX>
+		</PropertyGroup>
+		<!--<ItemDefinitionGroup>
+				<ProjectReference>
+						<IncludeOutputGroupsInVSIX>$(DefaultIncludeOutputGroupsInVSIX)</IncludeOutputGroupsInVSIX>
+						<IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup;</IncludeOutputGroupsInVSIXLocalOnly>
+				</ProjectReference>
+		</ItemDefinitionGroup>-->
+
+</Project>

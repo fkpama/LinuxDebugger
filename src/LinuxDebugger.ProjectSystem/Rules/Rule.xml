@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <Rule
+		Name="RemoteDebugLaunchProfile"
+		DisplayName="Linux Remote"
+		PageTemplate="commandNameBasedDebugger"
+		Description="Linux Remote Debugger options"
+		xmlns:sys="clr-namespace:System;assembly=mscorlib"
+		 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns="http://schemas.microsoft.com/build/2009/properties">
+		<!-- https://github.com/dotnet/project-system/blob/main/docs/repo/property-pages/property-specification.md -->
+		<!-- https://github.com/microsoft/VSProjectSystem/blob/master/doc/extensibility/property_value_editors.md -->
+		<Rule.Metadata>
+				<sys:String x:Key="CommandName">RemoteUnix</sys:String>
+		</Rule.Metadata>
+		<Rule.DataSource>
+				<DataSource Persistence="LaunchProfile"
+										HasConfigurationCondition="False"
+										ItemType="LaunchProfile"
+										/>
+				<!--<DataSource Persistence="LaunchProfile" />-->
+		</Rule.DataSource>
+
+		<StringProperty Name="executablePath"
+										DisplayName="Executable"
+										Description="Path to the executable to run. If left empty, the project output executable will be launched"
+										/>
+
+		<StringProperty Name="workingDirectory"
+										DisplayName="Working Directory"
+										Description="Path to the working directory where the process will be started. If left empty, the process will be started from the directory containing the executable (Deployment directory)."
+										/>
+
+		<StringProperty Name="deploymentDir"
+										DisplayName="Deployment Directory"
+										Description="Path to the directory where the process will be deployed."
+										/>
+
+		<StringProperty Name="commandLineArgs"
+										DisplayName="Command Line"
+										Description="Command Line Arguments to pass to the executable. You may break arguments into multiple lines."
+										>
+				<StringProperty.ValueEditors>
+						<ValueEditor EditorType="MultiLineString" />
+				</StringProperty.ValueEditors>
+		</StringProperty>
+
+		<StringProperty Name="environmentVariables"
+										DisplayName="Environment variables"
+										Description="The environment variables to set prior to running the process.">
+				<StringProperty.ValueEditors>
+						<ValueEditor EditorType="NameValueList" />
+				</StringProperty.ValueEditors>
+		</StringProperty>
+
+		<DynamicEnumProperty Name="connectionId"
+												 EnumProvider="ProjectConnectionsProvider"
+												 DisplayName="Ssh Connection"
+												 Description="The SSH connection to use"
+												 />
+		<StringProperty Name="SshConnectionConfigurationProperty"
+										DisplayName="Manage Connections">
+				<StringProperty.DataSource>
+						<DataSource PersistedName="SshConnectionConfigurationProperty"
+												Persistence="ProjectFileWithInterception"
+												HasConfigurationCondition="False" />
+				</StringProperty.DataSource>
+				<StringProperty.ValueEditors>
+						<ValueEditor EditorType="LinkAction">
+								<ValueEditor.Metadata>
+										<NameValuePair Name="Action" Value="Command" />
+										<NameValuePair Name="Command" Value="SshConnectionConfigurationCommand" />
+								</ValueEditor.Metadata>
+						</ValueEditor>
+				</StringProperty.ValueEditors>
+		</StringProperty>
+
+		 <StringProperty Name="preCommand"
+										 DisplayName="Pre-Launch commands"
+										 Description="Command to launch prior to running the process">
+				 <StringProperty.ValueEditors>
+						 <ValueEditor EditorType="ShellCommand" />
+				 </StringProperty.ValueEditors>
+		 </StringProperty>
+		<!--<BoolProperty Name="ignoreExitCodePre"
+									DisplayName="Ignore Pre-Commands Exit code">
+				<BoolProperty.Metadata>
+						<NameValuePair Name="IsReadOnlyCondition">
+								<NameValuePair.Value>(not (matches (unevaluated "RemoteUnix" "preCommand") "\s*"))</NameValuePair.Value>
+						</NameValuePair>
+				</BoolProperty.Metadata>
+		</BoolProperty>-->
+
+		 <StringProperty Name="postCommand"
+										 DisplayName="Post-Launch commands"
+										 Description="Command to launch after the process exits">
+				 <StringProperty.ValueEditors>
+						 <ValueEditor EditorType="ShellCommand" />
+				 </StringProperty.ValueEditors>
+		 </StringProperty>
+		<!--<BoolProperty Name="ignoreExitCodePost"
+									DisplayName="Ignore Post-Commands Exit code">
+				<BoolProperty.Metadata>
+						<NameValuePair Name="IsReadOnlyCondition">
+								<NameValuePair.Value>(not (matches (unevaluated "RemoteUnix" "postCommand") "\s*"))</NameValuePair.Value>
+						</NameValuePair>
+				</BoolProperty.Metadata>
+		</BoolProperty>-->
+
+		<StringProperty Name="additionalDeploymentFiles"
+										DisplayName="Additional deployment files">
+				<StringProperty.ValueEditors>
+						<ValueEditor EditorType="FileUploadMapping" />
+				</StringProperty.ValueEditors>
+		</StringProperty>
+
+		<StringProperty Name="postExecDownloadFiles"
+										DisplayName="Post-Exec downloads">
+				<StringProperty.ValueEditors>
+						<ValueEditor EditorType="FileUploadMapping">
+								<ValueEditor.Metadata>
+										<NameValuePair Name="Mode" Value="Download" />
+								</ValueEditor.Metadata>
+						</ValueEditor>
+				</StringProperty.ValueEditors>
+		</StringProperty>
+
+		 <BoolProperty Name="disableRedirections"
+									 DisplayName="Disable Redirections" />
+
+		 <BoolProperty Name="launchBrowser"
+									 DisplayName="Launch Browser" />
+
+		 <StringProperty Name="applicationUrl"
+										 DisplayName="Browser Url">
+				 <StringProperty.Metadata>
+						 <NameValuePair Name="VisibilityCondition">
+								 <NameValuePair.Value>(has-evaluated-value "RemoteUnix" "launchBrowser" true)</NameValuePair.Value>
+						 </NameValuePair>
+				 </StringProperty.Metadata>
+		 </StringProperty>
+</Rule>
