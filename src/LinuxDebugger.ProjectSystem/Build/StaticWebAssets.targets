@@ -1,0 +1,8 @@
+﻿<?xml version="1.0"?>
+<Project>
+		<Target Name="MyTarget">
+				<WriteLinesToFile Lines="Hello World"
+													File="C:\Temp\MyFile.txt"
+													/>
+		</Target>
+</Project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+		<ItemGroup>
+				<InternalsVisibleTo Include="Sodiware.VisualStudio.Linux.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100e1da21c4c1a2d6f5d8109f8078a07a9c6ec0e2b7c055e26b9ea662c73b889ba3b9c730a78e88029db74144b884d34f706e8fa1b80f0cf10d33e28e20b0a21edbcacd66f941d9a3a7da93715dc042395d8211e946b5eea4c91ee2c85370ac805201e8ed0afe6e03833a771f943afcb1b2d9f160e82614c6cb5824c831719bb1b7"/>
+		</ItemGroup>
+</Project>
+

@@ -1,0 +1,69 @@
+﻿<vsp:DialogWindow x:Class="LinuxDebugger.ProjectSystem.Controls.ConnectionSelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LinuxDebugger.ProjectSystem.Controls"
+        xmlns:vsp="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+        xmlns:vshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+        xmlns:vms="clr-namespace:LinuxDebugger.ProjectSystem.ViewModels"
+        Background="{DynamicResource {x:Static vsp:EnvironmentColors.ToolWindowBackgroundBrushKey}}"
+        Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.ToolWindowTextBrushKey}}"
+        BorderBrush="{DynamicResource {x:Static vsp:EnvironmentColors.ToolWindowBorderBrushKey}}"
+        WindowStyle="None" AllowsTransparency="True"
+        d:DataContext="{d:DesignInstance vms:ConnectionSelectionViewModel}"
+        SizeToContent="WidthAndHeight"
+        MinWidth="350"
+        MinHeight="300"
+        mc:Ignorable="d">
+    <Border Padding="10,0,10,15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Margin="0,0,0,15">
+                <Label Style="{DynamicResource {x:Static vshell:VsResourceKeys.LabelEnvironment133PercentFontSizeStyleKey}}">
+                    <TextBlock Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.ToolWindowTextBrushKey}}">
+                    Connection Selection
+                    </TextBlock>
+                </Label>
+            </Border>
+
+            <Border Grid.Row="1" Margin="0,0,0,10"
+                    Padding="5,0">
+                <ListView Style="{DynamicResource {x:Static vshell:VsResourceKeys.ThemedDialogListViewStyleKey}}"
+                          ItemsSource="{Binding Connections}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="IsSelected" Value="{Binding IsChecked}" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="vms:ConnectionViewModel">
+                            <TextBlock Text="{Binding Hostname}"
+                                       Style="{DynamicResource {x:Static vshell:VsResourceKeys.TextBlockEnvironment122PercentFontSizeStyleKey}}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <Border Grid.Row="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+                    <Button Style="{StaticResource {x:Static vshell:VsResourceKeys.ButtonStyleKey}}" 
+                            IsCancel="True"
+                            Margin="5,0"
+                            Content="Cancel" />
+                    <Button Style="{StaticResource {x:Static vshell:VsResourceKeys.ButtonStyleKey}}" 
+                            Click="OnWindowClose"
+                            Margin="5,0"
+                            IsEnabled="{Binding CanClose}"
+                            Content="Ok" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</vsp:DialogWindow>

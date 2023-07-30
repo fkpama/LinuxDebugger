@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+		<PropertyGroup>
+				<TargetFrameworks>net7.0;net472</TargetFrameworks>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<Nullable>enable</Nullable>
+				<SignAssembly>true</SignAssembly>
+		</PropertyGroup>
+
+		<ItemGroup>
+				<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+				<PackageReference Include="System.Collections.Immutable" Version="6.0.0" />
+				<PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="6.0.0" />
+		</ItemGroup>
+
+		<ItemGroup>
+		  <ProjectReference Include="..\LinuxDebugger.Core\LinuxDebugger.Core.csproj" />
+		</ItemGroup>
+</Project>

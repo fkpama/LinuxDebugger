@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+		<PropertyGroup>
+				<TargetFrameworks>netstandard2.1;net7.0;net472</TargetFrameworks>
+				<RootNamespace>LinuxDebugger</RootNamespace>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<Nullable>enable</Nullable>
+				<SignAssembly>true</SignAssembly>
+		</PropertyGroup>
+</Project>
